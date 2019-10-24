@@ -6,7 +6,7 @@
 
     <groupId>PimUnip</groupId>
     <artifactId>PimUnip</artifactId>
-    <version>1.0-0</version>
+    <version>ALPHA-0.0-1</version>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all -->
         <dependency>
