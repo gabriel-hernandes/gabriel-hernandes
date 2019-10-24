@@ -28,7 +28,7 @@ class MainFrame extends JFrame{
         mainPanel = new MainPanel(new GridBagLayout())
         getContentPane().add(mainPanel,BorderLayout.CENTER)
 
-        rodapePanel = new RodapePanel(new GridBagLayout())
+        rodapePanel = new RodapePanel()
         getContentPane().add(rodapePanel, BorderLayout.SOUTH)
 
         //Iniciando tela de Login

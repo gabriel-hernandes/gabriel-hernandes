@@ -1,5 +1,6 @@
 package DAO
 
+import Constants.UIConstants
 import db.DB
 import db.DbException
 
@@ -35,9 +36,8 @@ class ValidarUsuarioDAO {
 
             rs = pst.executeQuery()
             while(rs.next()){
-                println rs.getString("USUARIO")
-                println rs.getString("PASSWORD")
-                resultado.put(rs.getString("USUARIO"),rs.getString("PASSWORD"))
+                resultado.put(UIConstants.USUARIO_MAP_KEY,rs.getString("USUARIO"))
+                resultado.put(UIConstants.SENHA_MAP_KEY,rs.getString("PASSWORD"))
             }
             return resultado
         }catch(SQLException e){

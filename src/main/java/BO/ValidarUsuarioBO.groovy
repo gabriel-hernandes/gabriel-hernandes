@@ -1,5 +1,6 @@
 package BO
 
+import Constants.UIConstants
 import DAO.ValidarUsuarioDAO
 
 class ValidarUsuarioBO {
@@ -8,21 +9,18 @@ class ValidarUsuarioBO {
 
     String validarUsuario(String usuario, String senha){
         validado = false
-        String mensagem = null
-        Map<String,String> resutadoQuery = new HashMap<>()
+        String mensagem
         ValidarUsuarioDAO validaDAO = new ValidarUsuarioDAO()
-        resutadoQuery = validaDAO.validarUsuario(usuario)
-        if(resutadoQuery.get(usuario) == null){
+        Map<String,String> resutadoQuery = validaDAO.validarUsuario(usuario)
+        if(resutadoQuery.get(UIConstants.USUARIO_MAP_KEY) == null){
             validado = false
-            mensagem = "Usuario não Encontrado!"
-        }else if(resutadoQuery.get(usuario).equalsIgnoreCase(senha)){
+            mensagem = UIConstants.AVISO_USUARIO_NAO_ENCONTRADO
+        }else if(resutadoQuery.get(UIConstants.SENHA_MAP_KEY).equalsIgnoreCase(senha)){
             validado = true
-            println "Senha igual verificada!"
-            mensagem = "Login Efetuado com sucesso!"
+            mensagem = UIConstants.AVISO_LOGIN_EFETUADO_COM_SUCESSO
         }else{
             validado = false
-            println "Senha negada!"
-            mensagem ="Senha não corresponde ao usuario!"
+            mensagem =UIConstants.AVISO_SENHA_INVALIDA
         }
         return mensagem
     }
