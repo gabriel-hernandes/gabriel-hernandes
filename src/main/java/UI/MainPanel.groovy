@@ -5,6 +5,7 @@ import Constants.UIConstants
 import javax.swing.BorderFactory
 import javax.swing.JButton
 import javax.swing.JPanel
+import java.awt.Color
 import java.awt.Dimension
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
@@ -18,6 +19,7 @@ class MainPanel extends JPanel{
         super(layoutManager)
         constraints = new GridBagConstraints()
         setPreferredSize(new Dimension(UIConstants.MAIN_PANEL_LARGURA,UIConstants.MAIN_PANEL_ALTURA))
+        setBackground(Color.WHITE)
         setBorder(BorderFactory.createEtchedBorder())
         bt1 = new JButton("TESTE1")
         constraints.gridx = 0;

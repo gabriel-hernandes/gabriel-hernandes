@@ -22,11 +22,9 @@ class MainFrame extends JFrame{
         //Instanciando dump de memoria ao fechar o programa
         setDefaultCloseOperation(EXIT_ON_CLOSE)
 
-        headerPanel = new HeaderPanel(new GridBagLayout())
+        headerPanel = new HeaderPanel()
         getContentPane().add(headerPanel, BorderLayout.NORTH)
 
-
-        constraints.fill = GridBagConstraints.HORIZONTAL
         mainPanel = new MainPanel(new GridBagLayout())
         getContentPane().add(mainPanel,BorderLayout.CENTER)
 
@@ -38,6 +36,7 @@ class MainFrame extends JFrame{
 
         //Configurações de vizualização
         pack()
+        setLocationRelativeTo()
 //        setResizable(false)
         setVisible(true)
 

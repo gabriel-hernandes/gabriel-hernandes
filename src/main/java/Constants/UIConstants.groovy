@@ -24,6 +24,11 @@ class UIConstants {
     static final int RODAPE_PANEL_LINHAS = 1
     static final int RODAPE_PANEL_COLUNAS = 18
 
+    static final int LOGINBOX_PANEL_ALTURA = 40
+    static final int LOGINBOX_PANEL_LARGURA = 300
+
+    //Constantes de Login
+
     static final String TITULO_SISTEMA_DE_CONTROLE = "Sistema de Controle de Frotas"
 
 }
