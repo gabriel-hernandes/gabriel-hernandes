@@ -10,6 +10,7 @@ import java.sql.SQLException
 import java.sql.Statement
 
 class PesquisaDAO {
+ //CLASSE DE TESTE REMOVER!!
 
     Map<Integer,String> pesquisarDados(){
         Map<String,String> result = new HashMap<>()

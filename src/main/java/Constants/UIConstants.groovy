@@ -5,36 +5,28 @@ class UIConstants {
 
     //Mensagem do Titulo
     public static final String TITULO_SISTEMA_DE_CONTROLE = "Sistema de Controle de Frotas"
-
+    public static final String LOGOTIPO_SISTEMA = "img\\logotipo\\RageLogo.png";
+    public static final String LOGOTIPO_SISTEMA_MARCA_DAGUA = "img\\logotipo\\RageLogoTransparente.png";
+    public static final String LOGOTIPO_SISTEMA_ICONE = "img\\logotipo\\RageIcon.png";
 
     //Constantes de dimensão
     public static final int FRAME_ALTURA = 600
     public static final int FRAME_LARGURA = 900
-    public static final int FRAME_LINHAS = 12
-    public static final int FRAME_COLUNAS = 18
 
-
-
+    //Main Panel Constants
     public static final int MAIN_PANEL_ALTURA = 530
     public static final int MAIN_PANEL_LARGURA = 900
-    public static final int MAIN_PANEL_LINHAS = 10
-    public static final int MAIN_PANEL_COLUNAS = 18
-
 
     //Header constants
     public static final int HEADER_PANEL_ALTURA = 35
     public static final int HEADER_PANEL_LARGURA = 900
-    public static final int HEADER_PANEL__LINHAS = 1
-    public static final int HEADER_PANEL__COLUNAS = 18
-
     public static final int INFORMATIONBOX_PANEL_ALTURA = 40
     public static final int INFORMATIONBOX_PANEL_LARGURA = 300
-
     public static final int CADASTROBOX_PANEL_ALTURA = 40
     public static final int CADASTROBOX_PANEL_LARGURA = 100
-
     public static final int LOGINBOX_PANEL_ALTURA = 40
     public static final int LOGINBOX_PANEL_LARGURA = 300
+    public static final String MENSAGEM_SOLICITANDO_LOGIN = "SCF - Favor efetuar login para iniciar o sistema"
 
     //Constantes de Login
     public static final String DEFFAULT_USUARIO_TEXTBOX = "Usuario"
@@ -56,10 +48,13 @@ class UIConstants {
     public static final int RODAPE_PANEL_LINHAS = 1
     public static final int RODAPE_PANEL_COLUNAS = 18
 
+    //Cadastro Constants
+    public static final String MENSAGEM_POSSUI_CADASTRO = "Não possui cadastro?"
+    public static final String BOTAO_CADASTRAR = "Cadastrar"
+
     //Release information box
     public static final int RELEASE_INFORMATION_LABEL_ALTURA = 35
     public static final int RELEASE_INFORMATION_LABEL_LARGURA = 300
-
     public static final String VERSAO_SISTEMA_ATUAL = "Release Alpha 0.0.1 - 24/10/2019"
 
 }

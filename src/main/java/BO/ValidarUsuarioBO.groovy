@@ -3,6 +3,11 @@ package BO
 import Constants.UIConstants
 import DAO.ValidarUsuarioDAO
 
+import javax.swing.JButton
+import javax.swing.JPanel
+import java.awt.event.ActionEvent
+import java.awt.event.ActionListener
+
 class ValidarUsuarioBO {
 
     boolean validado = null
