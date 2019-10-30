@@ -1,5 +1,8 @@
 package Constants
 
+
+import javax.swing.text.MaskFormatter
+
 class UIConstants {
     //Constantes utilizadas no User Inteface
 
@@ -16,6 +19,10 @@ class UIConstants {
     //Main Panel Constants
     public static final int MAIN_PANEL_ALTURA = 530
     public static final int MAIN_PANEL_LARGURA = 900
+
+    public static final MaskFormatter MASCARA_RG = new MaskFormatter("##.###.###-##")
+    public static final MaskFormatter MASCARA_CPF = new MaskFormatter("###.###.###-##")
+    public final static MaskFormatter MASCARA_DATA = new MaskFormatter("##/##/####")
 
     //Header constants
     public static final int HEADER_PANEL_ALTURA = 35

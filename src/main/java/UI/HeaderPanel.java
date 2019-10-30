@@ -20,7 +20,7 @@ public class HeaderPanel extends JPanel{
     JPanel informationBox;
     JButton loginButton;
     JTextField textFieldLogin;
-    JTextField textFieldPassWord;
+    JPasswordField textFieldPassWord;
     JLabel informationLanbel;
     ValidarUsuarioBO validausuario;
 
@@ -76,7 +76,7 @@ public class HeaderPanel extends JPanel{
         return textFieldPassWord;
     }
 
-    public void setTextFieldPassWord(JTextField textFieldPassWord) {
+    public void setTextFieldPassWord(JPasswordField textFieldPassWord) {
         this.textFieldPassWord = textFieldPassWord;
     }
 
@@ -98,6 +98,9 @@ public class HeaderPanel extends JPanel{
 
     HeaderPanel(MainFrame mainFrame){
         this.mainFrame = mainFrame;
+        buildHederPanelPaginaInicial();
+    }
+    public void buildHederPanelPaginaInicial(){
         this.setLayout(new BorderLayout());
         setPreferredSize(new Dimension(UIConstants.HEADER_PANEL_LARGURA,UIConstants.HEADER_PANEL_ALTURA));
         creatInformationBox();
@@ -131,7 +134,7 @@ public class HeaderPanel extends JPanel{
         loginBox.setPreferredSize(new Dimension(UIConstants.LOGINBOX_PANEL_LARGURA,UIConstants.LOGINBOX_PANEL_ALTURA));
         textFieldLogin = new JTextField(UIConstants.DEFFAULT_USUARIO_TEXTBOX);
         textFieldLogin.setPreferredSize(new Dimension(100,25));
-        textFieldPassWord = new JTextField(UIConstants.DEFFAULT_SENHA_TEXTBOX);
+        textFieldPassWord = new JPasswordField(UIConstants.DEFFAULT_SENHA_TEXTBOX);
         textFieldPassWord.setPreferredSize(new Dimension(100,25));
         loginButton = new JButton(UIConstants.BOTAO_LOGIN_TEXT);
         loginBox.add(textFieldLogin);

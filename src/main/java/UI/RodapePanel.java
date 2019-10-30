@@ -107,9 +107,7 @@ public class RodapePanel extends JPanel {
     }
 
     void abrirTelaCadastro(){
-        mainFrame.getHeaderPanel().removeAll();
-        mainFrame.getMainPanel().removeAll();
-        mainFrame.getRodapePanel().removeAll();
+        mainFrame.mainPanel.criarTelaCadastro();
         mainFrame.repaint();
     }
 }
