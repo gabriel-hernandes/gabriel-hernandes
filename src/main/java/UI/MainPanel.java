@@ -5,12 +5,14 @@ import Constants.UIConstants;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.HashMap;
 
 public class MainPanel extends JPanel {
@@ -87,6 +89,10 @@ public class MainPanel extends JPanel {
         repaint();
     }
 
+    public void criarMenuInicial(){
+
+    }
+
     public void criarTelaCadastro(){
         remove(label);
         setConstraints(0,0);
@@ -160,6 +166,7 @@ public class MainPanel extends JPanel {
     }
 
     public boolean validarInformacoes(HashMap<String,String> mapa){
+        //TODO INCLUIR RESPOSTA DE USUARIO JA EXISTENTE
         boolean validacaoResult = false;
         if(mapa.get(UIConstants.MAPKEY_NOME) == null || mapa.get(UIConstants.MAPKEY_NOME).isEmpty()){
             abrirPopup(UIConstants.AVISO_CAMPO_NOME_NULO);
@@ -255,17 +262,20 @@ public class MainPanel extends JPanel {
     }
 
     public void criarCadastroTextFieldPessoal(){
-        nomeCompletoLabelTextField = new JTextField();
-        nomeCompletoLabelTextField.setPreferredSize(new Dimension(200,25));
-        nrRGPessoalLabelTextField = new JFormattedTextField(UIConstants.MASCARA_RG);
-        nrRGPessoalLabelTextField.setPreferredSize(new Dimension(200,25));
-        nrCPFPessoalLabelTextField = new JFormattedTextField(UIConstants.MASCARA_CPF);
-        nrCPFPessoalLabelTextField.setPreferredSize(new Dimension(200,25));
-        nrRegistroEmpresaLabelTextField = new JTextField();
-        nrRegistroEmpresaLabelTextField.setPreferredSize(new Dimension(200,25));
-        dtNascimentoTextField = new JFormattedTextField(UIConstants.MASCARA_DATA);
-        dtNascimentoTextField.setPreferredSize(new Dimension(200,25));
-
+        try {
+            nomeCompletoLabelTextField = new JTextField();
+            nomeCompletoLabelTextField.setPreferredSize(new Dimension(200, 25));
+            nrRGPessoalLabelTextField = new JFormattedTextField(new MaskFormatter(UIConstants.MASCARA_RG_STRING));
+            nrRGPessoalLabelTextField.setPreferredSize(new Dimension(200, 25));
+            nrCPFPessoalLabelTextField = new JFormattedTextField(new MaskFormatter(UIConstants.MASCARA_CPF_STRING));
+            nrCPFPessoalLabelTextField.setPreferredSize(new Dimension(200, 25));
+            nrRegistroEmpresaLabelTextField = new JTextField();
+            nrRegistroEmpresaLabelTextField.setPreferredSize(new Dimension(200, 25));
+            dtNascimentoTextField = new JFormattedTextField(new MaskFormatter(UIConstants.MASCARA_DATA_STRING));
+            dtNascimentoTextField.setPreferredSize(new Dimension(200, 25));
+        }catch(ParseException e){
+            e.printStackTrace();
+        }
     }
 
     public void adicionarCadastrolabelsPessoal(){

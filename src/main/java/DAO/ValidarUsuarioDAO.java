@@ -14,7 +14,6 @@ public class ValidarUsuarioDAO {
         Map<String, String> resultado = new HashMap<>();
         Connection conn = null;
         PreparedStatement pst = null;
-        Statement st = null;
         ResultSet rs = null;
         StringBuilder sql = new StringBuilder();
         try{

@@ -9,6 +9,14 @@ public class ValidarUsuarioBO {
 
     boolean validado;
 
+    public boolean isValidado() {
+        return validado;
+    }
+
+    public void setValidado(boolean validado) {
+        this.validado = validado;
+    }
+
     public String validarUsuario(String usuario, String senha){
         validado = false;
         String mensagem;
