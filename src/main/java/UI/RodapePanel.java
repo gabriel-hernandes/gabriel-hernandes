@@ -67,9 +67,18 @@ public class RodapePanel extends JPanel {
         this.mainFrame = mainFrame;
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(UIConstants.RODAPE_PANEL_LARGURA,UIConstants.RODAPE_PANEL_ALTURA));
+        criarTelaInicial();
+    }
+
+    public void criarTelaInicial(){
+        removeAll();
         createReleaseInformation();
         createCadastroBox();
         cadastroButtonAction();
+    }
+
+    public void criarTelaCadastro(){
+        cadastroBox.setVisible(false);
     }
 
     void createReleaseInformation(){
@@ -108,6 +117,7 @@ public class RodapePanel extends JPanel {
 
     void abrirTelaCadastro(){
         mainFrame.mainPanel.criarTelaCadastro();
+        mainFrame.rodapePanel.criarTelaCadastro();
         mainFrame.repaint();
     }
 }

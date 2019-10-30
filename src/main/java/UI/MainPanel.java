@@ -1,13 +1,17 @@
 package UI;
 
+import BO.CadastrarUsuarioBO;
 import Constants.UIConstants;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashMap;
 
 public class MainPanel extends JPanel {
     MainFrame mainframe;
@@ -64,6 +68,11 @@ public class MainPanel extends JPanel {
     MainPanel(MainFrame mainFrame, GridBagLayout layoutManager){
         super(layoutManager);
         this.mainframe = mainFrame;
+        criarTelaInicial();
+    }
+
+    public void criarTelaInicial(){
+        removeAll();
         constraints = new GridBagConstraints();
         setPreferredSize(new Dimension(UIConstants.MAIN_PANEL_LARGURA,UIConstants.MAIN_PANEL_ALTURA));
         setBackground(Color.WHITE);
@@ -74,7 +83,8 @@ public class MainPanel extends JPanel {
         }catch(IOException e){ e.printStackTrace();}
         label = new JLabel(imagemBotao);
         this.add(label);
-
+        revalidate();
+        repaint();
     }
 
     public void criarTelaCadastro(){
@@ -106,6 +116,79 @@ public class MainPanel extends JPanel {
         constraints.anchor = GridBagConstraints.EAST;
         cadastroPainel.add(botaoCadastrar,constraints);
         constraints.anchor = GridBagConstraints.WEST;
+        criarBotaoCadastrarAction();
+    }
+
+    public void criarBotaoCadastrarAction(){
+        botaoCadastrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                efetuarCadastro();
+
+            }
+        });
+    }
+
+    public void efetuarCadastro(){
+        boolean resultado = false;
+        HashMap<String,String> informacoesCadastro = new HashMap<String, String>();
+        informacoesCadastro = getTextFieldContents();
+        if(validarInformacoes(informacoesCadastro)){
+            CadastrarUsuarioBO cadastrarUsuarioBO = new CadastrarUsuarioBO();
+            resultado = cadastrarUsuarioBO.cadastrarUsuario(informacoesCadastro);
+            if(resultado){
+                abrirPopup("Usuadio cadastrado com Sucesso!");
+            }else{
+                abrirPopup("Ocorreu um erro ao tentar cadastrar o Usuario");
+            }
+        }
+        mainframe.mainPanel.criarTelaInicial();
+        mainframe.rodapePanel.criarTelaInicial();
+    }
+
+    public HashMap<String, String> getTextFieldContents(){
+        HashMap<String,String> result = new HashMap<String, String>();
+        result.put("Nome", nomeCompletoLabelTextField.getText());
+        result.put("RG", nrRGPessoalLabelTextField.getText().replace(".","").replace("-","").replace(" ",""));
+        result.put("CPF", nrCPFPessoalLabelTextField.getText().replace(".","").replace("-","").replace(" ",""));
+        result.put("Registro", nrRegistroEmpresaLabelTextField.getText());
+        result.put("Data",dtNascimentoTextField.getText().replace("/","").replace(" ",""));
+        result.put("Usuario", nomeDeUsuarioTextField.getText());
+        result.put("Senha", senhaTextField.getText());
+        result.put("SenhaRepetida", repetirSenhaTexteField.getText());
+        return result;
+    }
+
+    public boolean validarInformacoes(HashMap<String,String> mapa){
+        boolean validacaoResult = false;
+        if(mapa.get("Nome") == null || mapa.get("Nome").isEmpty()){
+            abrirPopup("Favor informar Nome Completo");
+            validacaoResult = false;
+        }else if(mapa.get("RG") == null || mapa.get("RG").isEmpty()){
+            abrirPopup("Favor informar numero de RG");
+            validacaoResult = false;
+        }else if(mapa.get("CPF") == null || mapa.get("CPF").isEmpty()){
+            abrirPopup("Favor informar numero de CPF");
+            validacaoResult = false;
+        }else if(mapa.get("Data") == null || mapa.get("Data").isEmpty()){
+            abrirPopup("Favor informar Data de nascimento");
+            validacaoResult = false;
+        }else if(mapa.get("Registro") == null || mapa.get("Registro").isEmpty()){
+            abrirPopup("Favor informar numero de registro");
+            validacaoResult = false;
+        }else if(mapa.get("Usuario") == null || mapa.get("Usuario").isEmpty()){
+            abrirPopup("Favor informar um nome de usuario");
+            validacaoResult = false;
+        }else if(mapa.get("Senha") == null || mapa.get("Senha").isEmpty()){
+            abrirPopup("Favor informar uma senha");
+            validacaoResult = false;
+        }else if(mapa.get("Senha").equals(mapa.get("SenhaRepetida"))){
+            validacaoResult = true;
+        }else{
+            abrirPopup("As senhas não são iguais");
+            validacaoResult = false;
+        }
+        return validacaoResult;
     }
 
     public void criarCamposCadastroPessoal(){
@@ -166,7 +249,7 @@ public class MainPanel extends JPanel {
         informacoesPessoaisLabel = new JLabel("Informações Pessoais: ");
         nomeCompletoLabel = new JLabel("Nome Completo: ");
         nrRGPessoalLabel = new JLabel("RG: ");
-        nrCPFPessoalLabel = new JLabel("CPR: ");
+        nrCPFPessoalLabel = new JLabel("CPF: ");
         nrRegistroEmpresaLabel = new JLabel("Numero de Registo da Empresa");
         dtNascimentoLabel = new JLabel("Data de nascimento: ");
     }
@@ -208,13 +291,35 @@ public class MainPanel extends JPanel {
         setConstraints(1,4);
         cadastroPainel.add(nrCPFPessoalLabelTextField,constraints);
         setConstraints(1,5);
-        cadastroPainel.add(nrRegistroEmpresaLabelTextField,constraints);
-        setConstraints(1,6);
         cadastroPainel.add(dtNascimentoTextField,constraints);
+        setConstraints(1,6);
+        cadastroPainel.add(nrRegistroEmpresaLabelTextField,constraints);
     }
 
     public void setConstraints(int x, int  y){
         constraints.gridx = x;
         constraints.gridy = y;
+    }
+
+    void abrirPopup(String mensagem){
+        //Popup de aviso de login
+        JFrame popUp = new JFrame();
+        popUp.setTitle(UIConstants.POPUP_FRAME_TITULO);
+        popUp.setPreferredSize(new Dimension(300,150));
+        popUp.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        try {
+            BufferedImage image = ImageIO.read(new FileInputStream(UIConstants.LOGOTIPO_SISTEMA_ICONE));
+            ImageIcon logoicon = new ImageIcon(image);
+            popUp.setIconImage(logoicon.getImage());
+        }catch(IOException e){ e.printStackTrace();}
+        popUp.setVisible(true);
+        popUp.setLocationRelativeTo(null);
+        JPanel painelAviso = new JPanel(new GridBagLayout());
+        painelAviso.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Cadastro"));
+        JLabel aviso = new JLabel();
+        aviso.setText(mensagem);
+        painelAviso.add(aviso);
+        popUp.add(painelAviso, BorderLayout.CENTER);
+        popUp.pack();
     }
 }
