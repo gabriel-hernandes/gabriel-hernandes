@@ -138,12 +138,12 @@ public class MainPanel extends JPanel {
             resultado = cadastrarUsuarioBO.cadastrarUsuario(informacoesCadastro);
             if(resultado){
                 abrirPopup(UIConstants.AVISO_USUARIO_CADASTRADO_SUCESSO);
+                mainframe.mainPanel.criarTelaInicial();
+                mainframe.rodapePanel.criarTelaInicial();
             }else{
                 abrirPopup(UIConstants.AVISO_ERRO_AO_CADASTRAR_USUARIO);
             }
         }
-        mainframe.mainPanel.criarTelaInicial();
-        mainframe.rodapePanel.criarTelaInicial();
     }
 
     public HashMap<String, String> getTextFieldContents(){
