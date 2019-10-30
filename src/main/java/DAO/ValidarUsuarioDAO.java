@@ -8,9 +8,9 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
-class ValidarUsuarioDAO {
+public class ValidarUsuarioDAO {
 
-    Map<String, String> validarUsuario(String usuario){
+    public Map<String, String> validarUsuario(String usuario){
         Map<String, String> resultado = new HashMap<>();
         Connection conn = null;
         PreparedStatement pst = null;
