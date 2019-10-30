@@ -111,7 +111,7 @@ public class MainPanel extends JPanel {
     }
 
     public void criarBotaoCadastrar(){
-        botaoCadastrar = new JButton("Cadastrar");
+        botaoCadastrar = new JButton(UIConstants.BOTAO_CADASTRAR);
         setConstraints(4,6);
         constraints.anchor = GridBagConstraints.EAST;
         cadastroPainel.add(botaoCadastrar,constraints);
@@ -137,9 +137,9 @@ public class MainPanel extends JPanel {
             CadastrarUsuarioBO cadastrarUsuarioBO = new CadastrarUsuarioBO();
             resultado = cadastrarUsuarioBO.cadastrarUsuario(informacoesCadastro);
             if(resultado){
-                abrirPopup("Usuadio cadastrado com Sucesso!");
+                abrirPopup(UIConstants.AVISO_USUARIO_CADASTRADO_SUCESSO);
             }else{
-                abrirPopup("Ocorreu um erro ao tentar cadastrar o Usuario");
+                abrirPopup(UIConstants.AVISO_ERRO_AO_CADASTRAR_USUARIO);
             }
         }
         mainframe.mainPanel.criarTelaInicial();
@@ -148,44 +148,44 @@ public class MainPanel extends JPanel {
 
     public HashMap<String, String> getTextFieldContents(){
         HashMap<String,String> result = new HashMap<String, String>();
-        result.put("Nome", nomeCompletoLabelTextField.getText());
-        result.put("RG", nrRGPessoalLabelTextField.getText().replace(".","").replace("-","").replace(" ",""));
-        result.put("CPF", nrCPFPessoalLabelTextField.getText().replace(".","").replace("-","").replace(" ",""));
-        result.put("Registro", nrRegistroEmpresaLabelTextField.getText());
-        result.put("Data",dtNascimentoTextField.getText().replace("/","").replace(" ",""));
-        result.put("Usuario", nomeDeUsuarioTextField.getText());
-        result.put("Senha", senhaTextField.getText());
-        result.put("SenhaRepetida", repetirSenhaTexteField.getText());
+        result.put(UIConstants.MAPKEY_NOME, nomeCompletoLabelTextField.getText());
+        result.put(UIConstants.MAPKEY_RG, nrRGPessoalLabelTextField.getText().replace(".","").replace("-","").replace(" ",""));
+        result.put(UIConstants.MAPKEY_CPF, nrCPFPessoalLabelTextField.getText().replace(".","").replace("-","").replace(" ",""));
+        result.put(UIConstants.MAPKEY_REGISTRO, nrRegistroEmpresaLabelTextField.getText());
+        result.put(UIConstants.MAPKEY_DATA,dtNascimentoTextField.getText().replace("/","").replace(" ",""));
+        result.put(UIConstants.MAPKEY_USUARIO, nomeDeUsuarioTextField.getText());
+        result.put(UIConstants.MAPKEY_SENHA, senhaTextField.getText());
+        result.put(UIConstants.MAPKEY_SENHA_REPETIDA, repetirSenhaTexteField.getText());
         return result;
     }
 
     public boolean validarInformacoes(HashMap<String,String> mapa){
         boolean validacaoResult = false;
-        if(mapa.get("Nome") == null || mapa.get("Nome").isEmpty()){
-            abrirPopup("Favor informar Nome Completo");
+        if(mapa.get(UIConstants.MAPKEY_NOME) == null || mapa.get(UIConstants.MAPKEY_NOME).isEmpty()){
+            abrirPopup(UIConstants.AVISO_CAMPO_NOME_NULO);
             validacaoResult = false;
-        }else if(mapa.get("RG") == null || mapa.get("RG").isEmpty()){
-            abrirPopup("Favor informar numero de RG");
+        }else if(mapa.get(UIConstants.MAPKEY_RG) == null || mapa.get(UIConstants.MAPKEY_RG).isEmpty()){
+            abrirPopup(UIConstants.AVISO_CAMPO_RG_NULO);
             validacaoResult = false;
-        }else if(mapa.get("CPF") == null || mapa.get("CPF").isEmpty()){
-            abrirPopup("Favor informar numero de CPF");
+        }else if(mapa.get(UIConstants.MAPKEY_CPF) == null || mapa.get(UIConstants.MAPKEY_CPF).isEmpty()){
+            abrirPopup(UIConstants.AVISO_CAMPO_CPF_NULO);
             validacaoResult = false;
-        }else if(mapa.get("Data") == null || mapa.get("Data").isEmpty()){
-            abrirPopup("Favor informar Data de nascimento");
+        }else if(mapa.get(UIConstants.MAPKEY_DATA) == null || mapa.get(UIConstants.MAPKEY_DATA).isEmpty()){
+            abrirPopup(UIConstants.AVISO_CAMPO_DATA_NULO);
             validacaoResult = false;
-        }else if(mapa.get("Registro") == null || mapa.get("Registro").isEmpty()){
-            abrirPopup("Favor informar numero de registro");
+        }else if(mapa.get(UIConstants.MAPKEY_REGISTRO) == null || mapa.get(UIConstants.MAPKEY_REGISTRO).isEmpty()){
+            abrirPopup(UIConstants.AVISO_CAMPO_REGISTRO_NULO);
             validacaoResult = false;
-        }else if(mapa.get("Usuario") == null || mapa.get("Usuario").isEmpty()){
-            abrirPopup("Favor informar um nome de usuario");
+        }else if(mapa.get(UIConstants.MAPKEY_USUARIO) == null || mapa.get(UIConstants.MAPKEY_USUARIO).isEmpty()){
+            abrirPopup(UIConstants.AVISO_CAMPO_USUARIO_NULO);
             validacaoResult = false;
-        }else if(mapa.get("Senha") == null || mapa.get("Senha").isEmpty()){
-            abrirPopup("Favor informar uma senha");
+        }else if(mapa.get(UIConstants.MAPKEY_SENHA) == null || mapa.get(UIConstants.MAPKEY_SENHA).isEmpty()){
+            abrirPopup(UIConstants.AVISO_CAMPO_SENHA_NULO);
             validacaoResult = false;
-        }else if(mapa.get("Senha").equals(mapa.get("SenhaRepetida"))){
+        }else if(mapa.get(UIConstants.MAPKEY_SENHA).equals(mapa.get(UIConstants.MAPKEY_SENHA_REPETIDA))){
             validacaoResult = true;
         }else{
-            abrirPopup("As senhas não são iguais");
+            abrirPopup(UIConstants.AVISO_CAMPO_SENHA_REPETIDA_INVALIDA);
             validacaoResult = false;
         }
         return validacaoResult;
@@ -208,10 +208,10 @@ public class MainPanel extends JPanel {
     }
 
     public void criarCadastroLabelsLogin(){
-        informacoesLogin = new JLabel("Informações de Login: ");
-        nomeDeUsuarioLabel = new JLabel("Nome de Usuario: ");
-        senhaLabel = new JLabel("Senha: ");
-        repetirSenhaLabel = new JLabel("Repita a Senha: ");
+        informacoesLogin = new JLabel(UIConstants.LABEL_INFORMACOES_LOGIN);
+        nomeDeUsuarioLabel = new JLabel(UIConstants.LABEL_USUARIO_CADASTRO);
+        senhaLabel = new JLabel(UIConstants.LABEL_SENHA_CADASTRO);
+        repetirSenhaLabel = new JLabel(UIConstants.LABEL_REPITA_SENHA_CADASTRO);
 
     }
 
@@ -246,12 +246,12 @@ public class MainPanel extends JPanel {
     }
 
     public void criarCadastroLabelsPessoal(){
-        informacoesPessoaisLabel = new JLabel("Informações Pessoais: ");
-        nomeCompletoLabel = new JLabel("Nome Completo: ");
-        nrRGPessoalLabel = new JLabel("RG: ");
-        nrCPFPessoalLabel = new JLabel("CPF: ");
-        nrRegistroEmpresaLabel = new JLabel("Numero de Registo da Empresa");
-        dtNascimentoLabel = new JLabel("Data de nascimento: ");
+        informacoesPessoaisLabel = new JLabel(UIConstants.LABEL_INFORMACOES_PESSOAIS);
+        nomeCompletoLabel = new JLabel(UIConstants.LABEL_INFORMACOES_NOME);
+        nrRGPessoalLabel = new JLabel(UIConstants.LABEL_INFORMACOES_RG);
+        nrCPFPessoalLabel = new JLabel(UIConstants.LABEL_INFORMACOES_CPF);
+        nrRegistroEmpresaLabel = new JLabel(UIConstants.LABEL_INFORMACOES_REGISTRO);
+        dtNascimentoLabel = new JLabel(UIConstants.LABEL_INFORMACOES_DATA);
     }
 
     public void criarCadastroTextFieldPessoal(){
@@ -315,7 +315,7 @@ public class MainPanel extends JPanel {
         popUp.setVisible(true);
         popUp.setLocationRelativeTo(null);
         JPanel painelAviso = new JPanel(new GridBagLayout());
-        painelAviso.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Cadastro"));
+        painelAviso.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), UIConstants.AVISO_POPUP_CADASTRO));
         JLabel aviso = new JLabel();
         aviso.setText(mensagem);
         painelAviso.add(aviso);

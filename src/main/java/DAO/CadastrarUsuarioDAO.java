@@ -1,5 +1,6 @@
 package DAO;
 
+import Constants.UIConstants;
 import db.DB;
 import db.DbException;
 
@@ -9,7 +10,7 @@ import java.util.HashMap;
 public class CadastrarUsuarioDAO {
 
     public boolean cadastrarUsuario(HashMap<String,String> informacoes){
-        System.out.println("Entrou no DAO");
+
         boolean resultado = false;
         Connection conn = null;
         PreparedStatement pst = null;
@@ -31,19 +32,14 @@ public class CadastrarUsuarioDAO {
             sql.append("VALUES ");
             sql.append("(?,?,?,?,?) ");
             String sqlStatment = sql.toString();
-            String data = informacoes.get("Dia") + "/" + informacoes.get("Mes") + "/" + informacoes.get("Ano");
+            String data = informacoes.get(UIConstants.MAPKEY_DIA) + "/" + informacoes.get(UIConstants.MAPKEY_MES) + "/" + informacoes.get(UIConstants.MAPKEY_ANO);
 
             pst = conn.prepareStatement(sqlStatment, Statement.RETURN_GENERATED_KEYS);
-            pst.setString(1,informacoes.get("Nome"));
-            System.out.println(informacoes.get("Nome"));
-            pst.setString(2,informacoes.get("RG"));
-            System.out.println(informacoes.get("RG"));
-            pst.setString(3,informacoes.get("CPF"));
-            System.out.println(informacoes.get("CPF"));
+            pst.setString(1,informacoes.get(UIConstants.MAPKEY_NOME));
+            pst.setString(2,informacoes.get(UIConstants.MAPKEY_RG));
+            pst.setString(3,informacoes.get(UIConstants.MAPKEY_CPF));
             pst.setString(4,data);
-            System.out.println(data);
-            pst.setString(5,informacoes.get("Registro"));
-            System.out.println(informacoes.get("Registro"));
+            pst.setString(5,informacoes.get(UIConstants.MAPKEY_REGISTRO));
 
             pst.executeUpdate();
             rst = pst.getGeneratedKeys();
@@ -64,21 +60,20 @@ public class CadastrarUsuarioDAO {
 
             pst = conn.prepareStatement(sqlStatment2);
             pst.setInt(1,idGerada);
-            pst.setString(2,informacoes.get("Usuario"));
-            pst.setString(3,informacoes.get("Senha"));
+            pst.setString(2,informacoes.get(UIConstants.MAPKEY_USUARIO));
+            pst.setString(3,informacoes.get(UIConstants.MAPKEY_SENHA));
             pst.setInt(4,2);
 
             pst.executeUpdate();
 
             conn.commit();
-            System.out.println("Passou no final do Dao");
+
             resultado = true;
         }catch(Exception e){
             conn.rollback();
-            System.out.println("passou aqui");
             resultado = false;
             e.printStackTrace();
-            throw new DbException("Falha ao cadastrar usuario no banco de dados causado por: " + e.getMessage());
+            throw new DbException(UIConstants.AVIS_FALHA_CADASTRO_NO_BANCO_DE_DADOS + e.getMessage());
         }finally {
             DB.closeStatement(pst);
             return resultado;
